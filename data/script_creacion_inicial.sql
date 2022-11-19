@@ -461,23 +461,6 @@ FROM [gd_esquema].[Maestra] M JOIN [NUEVE_Z].[PROVINCIA] P
 ON (M.CLIENTE_PROVINCIA = P.PROVINCIA_NOMBRE)
 
 /*MEDIO_DE_ENVIO*/
-/*
-Aca traen problemas los medios de envio que son Entrega en sucursal, para mi lo ideal es tener uno y que no tenga cp ni localidad. Pero charlable.
-El problema es que cuando joineas venta te multiplica las ventas que tienen entrega en sucursal te las multiplica por todos estos registros
-
-INSERT INTO [NUEVE_Z].[MEDIO_DE_ENVIO] (MEDIO_DE_ENVIO, MEDIO_ENVIO_PRECIO, CP_CODIGO, LOCALIDAD_CODIGO)
-SELECT DISTINCT M.VENTA_MEDIO_ENVIO, M.VENTA_ENVIO_PRECIO, M.CLIENTE_CODIGO_POSTAL, L.LOCALIDAD_CODIGO
-FROM [NUEVE_Z].[CODIGO_POSTAL] CP 
-JOIN [gd_esquema].[Maestra] M ON(CP.CODIGO = M.CLIENTE_CODIGO_POSTAL)
-JOIN [NUEVE_Z].[LOCALIDAD] L ON(M.CLIENTE_LOCALIDAD = L.LOCALIDAD)
-WHERE M.VENTA_MEDIO_ENVIO NOT LIKE 'Entrega en sucursal'
-
-UNION 
-
-SELECT 'Entrega en sucursal', 0, null, null
-
-
-*/
 
 INSERT INTO [NUEVE_Z].[MEDIO_DE_ENVIO] (MEDIO_DE_ENVIO, MEDIO_ENVIO_PRECIO, CP_CODIGO, LOCALIDAD_CODIGO)
 SELECT DISTINCT M.VENTA_MEDIO_ENVIO, M.VENTA_ENVIO_PRECIO, M.CLIENTE_CODIGO_POSTAL, L.LOCALIDAD_CODIGO
